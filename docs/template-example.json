@@ -1,0 +1,40 @@
+{
+    "fields": [
+      {
+        "type": "input",
+        "inputType": "text",
+        "label": "Input 1",
+        "model": "input1",
+        "placeholder": "Input 1",
+        "featured": true,
+        "required": true
+      },
+      {
+        "type": "input",
+        "inputType": "text",
+        "label": "Input 2",
+        "model": "input2",
+        "placeholder": "Input 2",
+        "featured": true,
+        "required": false
+      },
+      {
+        "type": "input",
+        "inputType": "text",
+        "label": "Input 3",
+        "model": "input3",
+        "placeholder": "Input 3",
+        "featured": true,
+        "required": false
+      },
+      {
+        "type": "input",
+        "inputType": "text",
+        "label": "Input 4",
+        "model": "input4",
+        "placeholder": "Input 4",
+        "featured": true,
+        "required": false
+      }
+    ]
+  }
