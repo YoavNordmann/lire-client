@@ -34,7 +34,7 @@ export default {
         type: String
     },
     mode: {
-      type: String
+      type: String,
     }
   },
   data() {
@@ -51,14 +51,9 @@ export default {
   },
   mounted () {
     this.axios
-      .get('http://localhost:8000/systemdata/resource_template')
+      .get('http://localhost:8000/template/' + this.id)
       .then(response => (this.schema = JSON.parse(response.data.properties.schema)));
 
-    if(this.mode != 'create'){
-      this.axios
-        .get('http://localhost:8000/template/'+this.id)
-        .then(response => (this.model = response.data.properties));
-    }
   },
   methods: {
     createTemplate() {

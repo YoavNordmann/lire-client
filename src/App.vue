@@ -12,12 +12,28 @@
         </v-list-item>
         <v-list-item to="/template">
           <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
+            <v-icon>mdi-alpha-t-circle</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Template</v-list-item-title>
+            <v-list-item-title>Templates</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item to="/resource">
+          <v-list-item-action>
+            <v-icon>mdi-alpha-r-circle</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Resources</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>        
+        <v-list-item to="/action">
+          <v-list-item-action>
+            <v-icon>mdi-alpha-a-circle</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Action Types</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>        
       </v-list>
     </v-navigation-drawer>
 

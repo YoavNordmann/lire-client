@@ -34,7 +34,10 @@ export default {
         type: String
     },
     mode: {
-      type: String
+      type: String,
+    },
+    type: {
+        type: String
     }
   },
   data() {
@@ -51,19 +54,19 @@ export default {
   },
   mounted () {
     this.axios
-      .get('http://localhost:8000/systemdata/resource_template')
+      .get('http://localhost:8000/template/'+this.type)
       .then(response => (this.schema = JSON.parse(response.data.properties.schema)));
 
     if(this.mode != 'create'){
       this.axios
-        .get('http://localhost:8000/template/'+this.id)
+        .get('http://localhost:8000/resource/'+this.type +'/' + this.id)
         .then(response => (this.model = response.data.properties));
     }
   },
   methods: {
     createTemplate() {
       this.axios
-        .post(`http://localhost:8000/template`, this.model)
+        .post(`http://localhost:8000/resource/` +this.type, this.model)
         .then(response => {
           console.log(response);
           this.model={};
@@ -76,7 +79,7 @@ export default {
     },
     updateTemplate() {
       this.axios
-        .update(`http://localhost:8000/template`, this.model)
+        .update(`http://localhost:8000/resource/` +this.type, this.model)
         .then(response => {
           console.log(response);
           this.model={};

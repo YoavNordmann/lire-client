@@ -3,36 +3,27 @@
       {
         "type": "input",
         "inputType": "text",
-        "label": "Input 1",
-        "model": "input1",
-        "placeholder": "Input 1",
+        "label": "Name",
+        "model": "name",
+        "placeholder": "Name",
         "featured": true,
         "required": true
       },
       {
         "type": "input",
         "inputType": "text",
-        "label": "Input 2",
-        "model": "input2",
-        "placeholder": "Input 2",
+        "label": "Description",
+        "model": "description",
+        "placeholder": "Add a description",
         "featured": true,
         "required": false
       },
       {
         "type": "input",
         "inputType": "text",
-        "label": "Input 3",
-        "model": "input3",
-        "placeholder": "Input 3",
-        "featured": true,
-        "required": false
-      },
-      {
-        "type": "input",
-        "inputType": "text",
-        "label": "Input 4",
-        "model": "input4",
-        "placeholder": "Input 4",
+        "label": "Tags",
+        "model": "tags",
+        "placeholder": "List of tags; comma seperated",
         "featured": true,
         "required": false
       }
