@@ -31,7 +31,7 @@
           <div>
             <v-btn v-if="mode == 'view'" @click="updateGraph">Save</v-btn>
             <v-btn v-if="mode == 'view'" @click="deleteItem($event, model.name)">Delete</v-btn>
-            <v-btn v-if="mode == 'create'" @click="createTemplate">Create</v-btn>
+            <v-btn v-if="mode == 'create'" @click="createGraph">Create</v-btn>
           </div>
           <div>
              {{ message }}
@@ -72,7 +72,7 @@ export default {
     if(this.mode != 'create'){
       this.axios
         .get('http://localhost:8000/data/graph/'+this.id)
-        .then(response => (this.model = response.data.properties));
+        .then(response => (this.model = response.data));
     }
   },
   methods: {
