@@ -51,14 +51,14 @@ export default {
   },
   mounted () {
     this.axios
-      .get('http://localhost:8000/template/' + this.id)
+      .get('http://localhost:8000/data/template/' + this.id)
       .then(response => (this.schema = JSON.parse(response.data.properties.schema)));
 
   },
   methods: {
     createTemplate() {
       this.axios
-        .post(`http://localhost:8000/template`, this.model)
+        .post(`http://localhost:8000/data/template`, this.model)
         .then(response => {
           console.log(response);
           this.model={};
@@ -71,7 +71,7 @@ export default {
     },
     updateTemplate() {
       this.axios
-        .update(`http://localhost:8000/template`, this.model)
+        .update(`http://localhost:8000/data/template`, this.model)
         .then(response => {
           console.log(response);
           this.model={};

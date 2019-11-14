@@ -1,24 +1,44 @@
 <template>
-  <v-container>
-    <v-layout text-center wrap>      
-      <div class="panel-body">
-        <div>
-          <h3>{{mode}} {{id}}</h3>
-        </div>
 
-        <v-flex mb-4>
-          <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
+  <v-container>
+
+    <v-form>
+      <v-container>
+        <v-row>
+
+          <v-col cols="12" sm="6">
+            <v-text-field
+              v-model="model.name"
+              label="Name"
+              single-line
+              solo
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <v-select
+              v-model="model.resources"
+              :items="resourcelist"
+              attach
+              chips
+              label="Resources"
+              multiple
+            ></v-select>
+          </v-col>
+
+        </v-row>
+        <v-row>
           <div>
-            <v-btn v-if="mode == 'view'" @click="updateTemplate">Save</v-btn>
+            <v-btn v-if="mode == 'view'" @click="updateGraph">Save</v-btn>
             <v-btn v-if="mode == 'view'" @click="deleteItem($event, model.name)">Delete</v-btn>
             <v-btn v-if="mode == 'create'" @click="createTemplate">Create</v-btn>
           </div>
           <div>
              {{ message }}
-          </div>
-        </v-flex>
-      </div>
-    </v-layout>
+          </div>          
+        </v-row>
+      </v-container>
+    </v-form>
   </v-container>
 </template>
 
@@ -35,38 +55,30 @@ export default {
     },
     mode: {
       type: String,
-    },
-    type: {
-        type: String
     }
   },
   data() {
     return {
       message: "",
       model: {},
-      schema: {},
-      formOptions: {
-        validateAfterLoad: true,
-        validateAfterChanged: true,
-        validateAsync: true
-      }
+      resourcelist: []
     };
   },
   mounted () {
     this.axios
-      .get('http://localhost:8000/data/template/'+this.type)
-      .then(response => (this.schema = JSON.parse(response.data.properties.schema)));
+      .get('http://localhost:8000/info/resources/name')
+      .then(response => (this.resourcelist = response.data));
 
     if(this.mode != 'create'){
       this.axios
-        .get('http://localhost:8000/data/resource/'+this.type +'/' + this.id)
+        .get('http://localhost:8000/data/graph/'+this.id)
         .then(response => (this.model = response.data.properties));
     }
   },
   methods: {
-    createTemplate() {
+    createGraph() {
       this.axios
-        .post(`http://localhost:8000/data/resource/` +this.type, this.model)
+        .post(`http://localhost:8000/data/graph`, this.model)
         .then(response => {
           console.log(response);
           this.model={};
@@ -77,9 +89,9 @@ export default {
           this.message = "Error occurred when updated: " + e
         });
     },
-    updateTemplate() {
+    updateGraph() {
       this.axios
-        .put(`http://localhost:8000/data/resource/` +this.type + '/' + this.id, this.model)
+        .put(`http://localhost:8000/data/graph` + this.id, this.model)
         .then(response => {
           console.log(response);
           this.model={};
@@ -93,7 +105,7 @@ export default {
     deleteItem: function (event, id) {
       if(confirm("Do you really want to delete Resource "+ id +" ?")){
             this.axios
-              .delete('http://localhost:8000/data/resource/'+ this.type + '/' + id)
+              .delete('http://localhost:8000/data/graph/'+ this.id)
               .then(response => (this.templatelist = response.data))
       }
     }

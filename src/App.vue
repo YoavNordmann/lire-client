@@ -26,12 +26,12 @@
             <v-list-item-title>Resources</v-list-item-title>
           </v-list-item-content>
         </v-list-item>        
-        <v-list-item to="/action">
+        <v-list-item to="/graphs">
           <v-list-item-action>
-            <v-icon>mdi-alpha-a-circle</v-icon>
+            <v-icon>mdi-alpha-g-circle</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Action Types</v-list-item-title>
+            <v-list-item-title>Graphs</v-list-item-title>
           </v-list-item-content>
         </v-list-item>        
       </v-list>
@@ -39,13 +39,8 @@
 
     <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>Linkable Resources</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn text href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
     </v-app-bar>
 
     <v-content>

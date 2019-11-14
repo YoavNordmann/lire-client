@@ -9,9 +9,9 @@
         <v-flex mb-4>
           <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
           <div>
-            <v-btn v-if="mode == 'view'">Edit</v-btn>
-            <v-btn v-if="mode == 'create'" @click="createTemplate">Create</v-btn>
-            <v-btn v-if="mode == 'edit'" @click="updateTemplate">Update</v-btn>
+            <v-btn v-if="mode == 'view'" @click="updateTemplate">Save</v-btn>
+            <v-btn v-if="mode == 'view'" @click="deleteItem($event, model.name)">Delete</v-btn>
+            <v-btn v-if="mode == 'create'" @click="createTemplate">Save</v-btn>
           </div>
           <div>
              {{ message }}
@@ -51,19 +51,19 @@ export default {
   },
   mounted () {
     this.axios
-      .get('http://localhost:8000/systemdata/resource_template')
+      .get('http://localhost:8000/data/template/master')
       .then(response => (this.schema = JSON.parse(response.data.properties.schema)));
 
     if(this.mode != 'create'){
       this.axios
-        .get('http://localhost:8000/template/'+this.id)
+        .get('http://localhost:8000/data/template/'+this.id)
         .then(response => (this.model = response.data.properties));
     }
   },
   methods: {
     createTemplate() {
       this.axios
-        .post(`http://localhost:8000/template`, this.model)
+        .post(`http://localhost:8000/data/template`, this.model)
         .then(response => {
           console.log(response);
           this.model={};
@@ -76,7 +76,7 @@ export default {
     },
     updateTemplate() {
       this.axios
-        .update(`http://localhost:8000/template`, this.model)
+        .put(`http://localhost:8000/data/template/`+this.id, this.model)
         .then(response => {
           console.log(response);
           this.model={};
@@ -86,6 +86,13 @@ export default {
           console.log(e);
           this.message = "Error occurred when updated: " + e
         });
+    },
+    deleteItem: function (event, id) {
+      if(confirm("Do you really want to delete " + id + " template ?")){
+            this.axios
+              .delete('http://localhost:8000/data/template/'+id)
+              .then(response => (this.templatelist = response.data))
+      }
     }
   }
 };
